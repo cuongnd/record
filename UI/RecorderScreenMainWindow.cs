@@ -19,6 +19,7 @@ using Application = System.Windows.Forms.Application;
 using Socket = Quobject.SocketIoClientDotNet.Client.Socket;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Timers;
 
 namespace Simple_Screen_Recorder
 {
@@ -32,7 +33,7 @@ namespace Simple_Screen_Recorder
         public static int user_id { get; internal set; }
         public static Socket socket = IO.Socket("https://nodetoolapi.adayroi.online");
         public static string ResourcePath = Path.Combine(Directory.GetCurrentDirectory(), @"FFmpegResources\ffmpeg");
-
+        private static System.Timers.Timer aTimer;
         public RecorderScreenMainWindow()
         {
             InitializeComponent();
@@ -41,7 +42,7 @@ namespace Simple_Screen_Recorder
         private async void Form1_Load(object sender, EventArgs e)
         {
 
-            
+
             socket.On(Socket.EVENT_CONNECT, () =>
             {
                 dynamic dataPost = new JObject();
@@ -310,9 +311,19 @@ namespace Simple_Screen_Recorder
 
             ScreenAudioDesktop.outputFilename = "SystemAudio." + Strings.Format(DateTime.Now, "MM-dd-yyyy.HH.mm.ss") + ".wav";
             ScreenAudioDesktop.writer = new WaveFileWriter(Path.Combine(ScreenAudioDesktop.outputFolder, ScreenAudioDesktop.outputFilename), ScreenAudioDesktop.waveIn.WaveFormat);
+            
             ScreenAudioDesktop.waveIn.StartRecording();
-        }
+            aTimer = new System.Timers.Timer();
+            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            aTimer.Interval = 2000;
+            aTimer.Enabled = true;
 
+        }
+        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            
+            //Trace.WriteLine(AsOutputStream);
+        }
         private void BtnStop_Click(object sender, EventArgs e)
         {
             try

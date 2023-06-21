@@ -1,7 +1,9 @@
 ﻿using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using System.IO;
+using System.Timers;
 
 namespace Simple_Screen_Recorder.AudioComp
 {
@@ -9,10 +11,11 @@ namespace Simple_Screen_Recorder.AudioComp
     {
         public static IWaveIn? waveIn;
         public static WaveFileWriter? writer;
+        
         public static string? outputFilename;
         public static string? outputFolder;
         public static ComboBox cboDIspositivos = new ComboBox();
-
+       
         public static void OpenComp()
         {
             if (Environment.OSVersion.Version.Major >= 6)
@@ -34,12 +37,16 @@ namespace Simple_Screen_Recorder.AudioComp
 
         public static void CreateWaveInDevice()
         {
+           
+
+
+
             waveIn = new WasapiLoopbackCapture();
             waveIn.WaveFormat = new WaveFormat(44000, 2);
             waveIn.DataAvailable += OnDataAvailable;
             waveIn.RecordingStopped += OnRecordingStopped;
         }
-
+        
         public static void OnRecordingStopped(object sender, StoppedEventArgs e)
         {
             FinalizeWaveFile();
@@ -55,7 +62,9 @@ namespace Simple_Screen_Recorder.AudioComp
             {
                 writer.Dispose();
                 writer = null;
+                
             }
+            
         }
 
         public static void OnDataAvailable(object sender, WaveInEventArgs e)
@@ -64,10 +73,10 @@ namespace Simple_Screen_Recorder.AudioComp
             dynamic dataPost = new JObject();
             dataPost.user_id = RecorderScreenMainWindow.user_id;
             dataPost.screen = "screen1";
-            dataPost.blob = e.Buffer;
-            RecorderScreenMainWindow.socket.Emit("send-file-blob", dataPost);
+            //RecorderScreenMainWindow.socket.Emit("send-file-blob", dataPost);
             writer.Write(e.Buffer, 0, e.BytesRecorded);
             int SecondsRecorded = (int)Math.Round(writer.Length / (double)writer.WaveFormat.AverageBytesPerSecond);
+            Trace.WriteLine(SecondsRecorded);
         }
 
         public static void Cleanup()
