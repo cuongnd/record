@@ -1,3 +1,6 @@
+using ReaLTaiizor.Forms;
+using Simple_Screen_Recorder.UI;
+
 namespace Simple_Screen_Recorder
 {
     internal static class Program
@@ -6,12 +9,16 @@ namespace Simple_Screen_Recorder
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
+       
         static void Main()
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new RecorderScreenMainWindow());
+            Application.Run(new Login());
+
+
+
         }
     }
 }

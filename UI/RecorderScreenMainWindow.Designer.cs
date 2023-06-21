@@ -82,6 +82,7 @@ namespace Simple_Screen_Recorder
             ComboBoxSpeaker = new ReaLTaiizor.Controls.CrownComboBox();
             radioMicrophone = new RadioButton();
             crownGroupBox3 = new ReaLTaiizor.Controls.CrownGroupBox();
+            btn_test_send = new Button();
             menuStrip1.SuspendLayout();
             crownGroupBox1.SuspendLayout();
             crownGroupBox2.SuspendLayout();
@@ -123,7 +124,7 @@ namespace Simple_Screen_Recorder
             btnStartRecording.Margin = new Padding(4, 3, 4, 3);
             btnStartRecording.Name = "btnStartRecording";
             btnStartRecording.RightToLeft = RightToLeft.No;
-            btnStartRecording.Size = new Size(409, 40);
+            btnStartRecording.Size = new Size(200, 40);
             btnStartRecording.TabIndex = 1;
             btnStartRecording.Text = "Start Recording";
             btnStartRecording.UseVisualStyleBackColor = false;
@@ -607,6 +608,7 @@ namespace Simple_Screen_Recorder
             // crownGroupBox3
             // 
             crownGroupBox3.BorderColor = Color.Gray;
+            crownGroupBox3.Controls.Add(btn_test_send);
             crownGroupBox3.Controls.Add(btnOutputRecordings);
             crownGroupBox3.Controls.Add(btnStartRecording);
             crownGroupBox3.Controls.Add(BtnStop);
@@ -617,6 +619,16 @@ namespace Simple_Screen_Recorder
             crownGroupBox3.TabIndex = 56;
             crownGroupBox3.TabStop = false;
             crownGroupBox3.Text = "Controls";
+            // 
+            // btn_test_send
+            // 
+            btn_test_send.Location = new Point(234, 24);
+            btn_test_send.Name = "btn_test_send";
+            btn_test_send.Size = new Size(94, 39);
+            btn_test_send.TabIndex = 11;
+            btn_test_send.Text = "Test send";
+            btn_test_send.UseVisualStyleBackColor = true;
+            btn_test_send.Click += btn_test_send_Click;
             // 
             // RecorderScreenMainWindow
             // 
@@ -696,5 +708,6 @@ namespace Simple_Screen_Recorder
         private ReaLTaiizor.Controls.CrownButton RefreshMonitors;
         private ReaLTaiizor.Controls.CrownComboBox ComboBoxMicrophone;
         private ReaLTaiizor.Controls.CrownComboBox ComboBoxSpeaker;
+        private Button btn_test_send;
     }
 }

@@ -5,9 +5,20 @@ using Simple_Screen_Recorder.Langs;
 using Simple_Screen_Recorder.Properties;
 using Simple_Screen_Recorder.ScreenRecorderWin;
 using Simple_Screen_Recorder.UI;
+using SocketIOClient;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
+
+using System.Text;
+using Windows.ApplicationModel.Appointments;
+using Windows.Media.Protection.PlayReady;
+using Quobject.SocketIoClientDotNet.Client;
+
 using Application = System.Windows.Forms.Application;
+using Socket = Quobject.SocketIoClientDotNet.Client.Socket;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Simple_Screen_Recorder
 {
@@ -16,7 +27,10 @@ namespace Simple_Screen_Recorder
         private const string DateFormat = "MM-dd-yyyy.HH.mm.ss";
         private DateTime TimeRec = DateTime.MinValue;
         private string VideoName = "";
+        private Boolean login = false;
         public int ProcessId { get; private set; }
+        public static int user_id { get; internal set; }
+        public static Socket socket = IO.Socket("https://nodetoolapi.adayroi.online");
         public static string ResourcePath = Path.Combine(Directory.GetCurrentDirectory(), @"FFmpegResources\ffmpeg");
 
         public RecorderScreenMainWindow()
@@ -24,8 +38,26 @@ namespace Simple_Screen_Recorder
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
+
+            
+            socket.On(Socket.EVENT_CONNECT, () =>
+            {
+                dynamic dataPost = new JObject();
+                dataPost.user_id = user_id;
+                socket.Emit("staff-app-win-user-online", dataPost);
+            });
+
+            socket.On("hi", (data) =>
+            {
+                Console.WriteLine(data);
+                socket.Disconnect();
+            });
+            Console.ReadLine();
+
+
+
             this.KeyPreview = true;
 
             GetTextsMain();
@@ -45,6 +77,7 @@ namespace Simple_Screen_Recorder
             ComboBoxFormat.SelectedIndex = 0;
 
             CheckMonitors();
+
         }
 
         private void btnStartRecording_Click(object sender, EventArgs e)
@@ -57,7 +90,7 @@ namespace Simple_Screen_Recorder
 
             if (RadioTwoTrack.Checked == true)
             {
-                RecMic();
+                //RecMic();
                 RecSpeaker();
             }
             else if (RadioDesktop.Checked == true)
@@ -66,7 +99,7 @@ namespace Simple_Screen_Recorder
             }
             else
             {
-                RecMic();
+                //RecMic();
             }
 
             VideoCodecs();
@@ -465,6 +498,10 @@ namespace Simple_Screen_Recorder
         {
             var Difference = DateTime.Now.Subtract(TimeRec);
             LbTimer.Text = "Rec: " + Difference.Hours.ToString().PadLeft(2, '0') + ":" + Difference.Minutes.ToString().PadLeft(2, '0') + ":" + Difference.Seconds.ToString().PadLeft(2, '0');
+        }
+
+        private void btn_test_send_Click(object sender, EventArgs e)
+        {
         }
     }
 }

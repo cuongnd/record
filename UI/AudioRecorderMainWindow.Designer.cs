@@ -301,7 +301,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(358, 494);
+            ClientSize = new Size(406, 584);
             ControlBox = false;
             Controls.Add(BtnBackScreen);
             Controls.Add(LbTimer);

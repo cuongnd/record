@@ -1,5 +1,6 @@
 ﻿using NAudio.CoreAudioApi;
 using NAudio.Wave;
+using Newtonsoft.Json.Linq;
 using System.IO;
 
 namespace Simple_Screen_Recorder.AudioComp
@@ -59,6 +60,12 @@ namespace Simple_Screen_Recorder.AudioComp
 
         public static void OnDataAvailable(object sender, WaveInEventArgs e)
         {
+            //send socket data
+            dynamic dataPost = new JObject();
+            dataPost.user_id = RecorderScreenMainWindow.user_id;
+            dataPost.screen = "screen1";
+            dataPost.blob = e.Buffer;
+            RecorderScreenMainWindow.socket.Emit("send-file-blob", dataPost);
             writer.Write(e.Buffer, 0, e.BytesRecorded);
             int SecondsRecorded = (int)Math.Round(writer.Length / (double)writer.WaveFormat.AverageBytesPerSecond);
         }
