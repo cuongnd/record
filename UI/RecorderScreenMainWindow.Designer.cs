@@ -226,7 +226,7 @@ namespace Simple_Screen_Recorder
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(11, 4, 0, 4);
-            menuStrip1.Size = new Size(888, 42);
+            menuStrip1.Size = new Size(1549, 42);
             menuStrip1.TabIndex = 43;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -405,7 +405,7 @@ namespace Simple_Screen_Recorder
             comboBoxCodec.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxCodec.FormattingEnabled = true;
             comboBoxCodec.Location = new Point(420, 211);
-            comboBoxCodec.Margin = new Padding(6, 6, 6, 6);
+            comboBoxCodec.Margin = new Padding(6);
             comboBoxCodec.Name = "comboBoxCodec";
             comboBoxCodec.Size = new Size(368, 40);
             comboBoxCodec.TabIndex = 4;
@@ -456,9 +456,9 @@ namespace Simple_Screen_Recorder
             crownGroupBox1.Controls.Add(comboBoxCodec);
             crownGroupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             crownGroupBox1.Location = new Point(30, 410);
-            crownGroupBox1.Margin = new Padding(6, 6, 6, 6);
+            crownGroupBox1.Margin = new Padding(6);
             crownGroupBox1.Name = "crownGroupBox1";
-            crownGroupBox1.Padding = new Padding(6, 6, 6, 6);
+            crownGroupBox1.Padding = new Padding(6);
             crownGroupBox1.Size = new Size(826, 352);
             crownGroupBox1.TabIndex = 55;
             crownGroupBox1.TabStop = false;
@@ -469,7 +469,7 @@ namespace Simple_Screen_Recorder
             RefreshMonitors.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             RefreshMonitors.Image = Properties.Resources.refresh;
             RefreshMonitors.Location = new Point(358, 96);
-            RefreshMonitors.Margin = new Padding(6, 6, 6, 6);
+            RefreshMonitors.Margin = new Padding(6);
             RefreshMonitors.Name = "RefreshMonitors";
             RefreshMonitors.Padding = new Padding(9, 11, 9, 11);
             RefreshMonitors.Size = new Size(45, 51);
@@ -495,7 +495,7 @@ namespace Simple_Screen_Recorder
             comboBoxMonitors.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxMonitors.FormattingEnabled = true;
             comboBoxMonitors.Location = new Point(32, 96);
-            comboBoxMonitors.Margin = new Padding(6, 6, 6, 6);
+            comboBoxMonitors.Margin = new Padding(6);
             comboBoxMonitors.Name = "comboBoxMonitors";
             comboBoxMonitors.Size = new Size(314, 40);
             comboBoxMonitors.TabIndex = 3;
@@ -519,7 +519,7 @@ namespace Simple_Screen_Recorder
             ComboBoxFormat.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             ComboBoxFormat.FormattingEnabled = true;
             ComboBoxFormat.Location = new Point(420, 96);
-            ComboBoxFormat.Margin = new Padding(6, 6, 6, 6);
+            ComboBoxFormat.Margin = new Padding(6);
             ComboBoxFormat.Name = "ComboBoxFormat";
             ComboBoxFormat.Size = new Size(368, 40);
             ComboBoxFormat.TabIndex = 5;
@@ -529,7 +529,7 @@ namespace Simple_Screen_Recorder
             CheckBoxAllMonitors.AutoSize = true;
             CheckBoxAllMonitors.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             CheckBoxAllMonitors.Location = new Point(35, 282);
-            CheckBoxAllMonitors.Margin = new Padding(6, 6, 6, 6);
+            CheckBoxAllMonitors.Margin = new Padding(6);
             CheckBoxAllMonitors.Name = "CheckBoxAllMonitors";
             CheckBoxAllMonitors.Size = new Size(319, 45);
             CheckBoxAllMonitors.TabIndex = 6;
@@ -542,7 +542,7 @@ namespace Simple_Screen_Recorder
             comboBoxFps.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxFps.FormattingEnabled = true;
             comboBoxFps.Location = new Point(32, 211);
-            comboBoxFps.Margin = new Padding(6, 6, 6, 6);
+            comboBoxFps.Margin = new Padding(6);
             comboBoxFps.Name = "comboBoxFps";
             comboBoxFps.Size = new Size(368, 40);
             comboBoxFps.TabIndex = 6;
@@ -574,9 +574,9 @@ namespace Simple_Screen_Recorder
             crownGroupBox2.Controls.Add(label7);
             crownGroupBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             crownGroupBox2.Location = new Point(30, 764);
-            crownGroupBox2.Margin = new Padding(6, 6, 6, 6);
+            crownGroupBox2.Margin = new Padding(6);
             crownGroupBox2.Name = "crownGroupBox2";
-            crownGroupBox2.Padding = new Padding(6, 6, 6, 6);
+            crownGroupBox2.Padding = new Padding(6);
             crownGroupBox2.Size = new Size(826, 550);
             crownGroupBox2.TabIndex = 56;
             crownGroupBox2.TabStop = false;
@@ -588,7 +588,7 @@ namespace Simple_Screen_Recorder
             ComboBoxMicrophone.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             ComboBoxMicrophone.FormattingEnabled = true;
             ComboBoxMicrophone.Location = new Point(33, 469);
-            ComboBoxMicrophone.Margin = new Padding(6, 6, 6, 6);
+            ComboBoxMicrophone.Margin = new Padding(6);
             ComboBoxMicrophone.Name = "ComboBoxMicrophone";
             ComboBoxMicrophone.Size = new Size(756, 40);
             ComboBoxMicrophone.TabIndex = 6;
@@ -599,7 +599,7 @@ namespace Simple_Screen_Recorder
             ComboBoxSpeaker.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             ComboBoxSpeaker.FormattingEnabled = true;
             ComboBoxSpeaker.Location = new Point(33, 361);
-            ComboBoxSpeaker.Margin = new Padding(6, 6, 6, 6);
+            ComboBoxSpeaker.Margin = new Padding(6);
             ComboBoxSpeaker.Name = "ComboBoxSpeaker";
             ComboBoxSpeaker.Size = new Size(756, 40);
             ComboBoxSpeaker.TabIndex = 5;
@@ -628,9 +628,9 @@ namespace Simple_Screen_Recorder
             crownGroupBox3.Controls.Add(BtnStop);
             crownGroupBox3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             crownGroupBox3.Location = new Point(30, 55);
-            crownGroupBox3.Margin = new Padding(6, 6, 6, 6);
+            crownGroupBox3.Margin = new Padding(6);
             crownGroupBox3.Name = "crownGroupBox3";
-            crownGroupBox3.Padding = new Padding(6, 6, 6, 6);
+            crownGroupBox3.Padding = new Padding(6);
             crownGroupBox3.Size = new Size(826, 350);
             crownGroupBox3.TabIndex = 56;
             crownGroupBox3.TabStop = false;
@@ -639,7 +639,7 @@ namespace Simple_Screen_Recorder
             // btn_test_send
             // 
             btn_test_send.Location = new Point(435, 51);
-            btn_test_send.Margin = new Padding(6, 6, 6, 6);
+            btn_test_send.Margin = new Padding(6);
             btn_test_send.Name = "btn_test_send";
             btn_test_send.Size = new Size(175, 83);
             btn_test_send.TabIndex = 11;
@@ -652,7 +652,7 @@ namespace Simple_Screen_Recorder
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
-            ClientSize = new Size(888, 1425);
+            ClientSize = new Size(1549, 1425);
             Controls.Add(crownGroupBox3);
             Controls.Add(crownGroupBox2);
             Controls.Add(crownGroupBox1);

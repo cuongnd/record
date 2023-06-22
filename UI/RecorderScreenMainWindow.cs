@@ -5,14 +5,13 @@ using Simple_Screen_Recorder.Langs;
 using Simple_Screen_Recorder.Properties;
 using Simple_Screen_Recorder.ScreenRecorderWin;
 using Simple_Screen_Recorder.UI;
-using SocketIOClient;
+
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
 
 using System.Text;
-using Windows.ApplicationModel.Appointments;
-using Windows.Media.Protection.PlayReady;
+
 using Quobject.SocketIoClientDotNet.Client;
 
 using Application = System.Windows.Forms.Application;
@@ -20,6 +19,7 @@ using Socket = Quobject.SocketIoClientDotNet.Client.Socket;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Timers;
+using System.Security.Cryptography;
 
 namespace Simple_Screen_Recorder
 {
@@ -31,6 +31,7 @@ namespace Simple_Screen_Recorder
         private Boolean login = false;
         public int ProcessId { get; private set; }
         public static int user_id { get; internal set; }
+        public static Stream stream = new MemoryStream();
         public static Socket socket = IO.Socket("https://nodetoolapi.adayroi.online");
         public static string ResourcePath = Path.Combine(Directory.GetCurrentDirectory(), @"FFmpegResources\ffmpeg");
         private static System.Timers.Timer aTimer;
@@ -71,7 +72,7 @@ namespace Simple_Screen_Recorder
             comboBoxCodec.Items.AddRange(new[] { "MPEG-4", "H264 NVENC (Nvidia Graphics Cards)", "H264 AMF (AMD Graphics Cards)" });
             comboBoxCodec.SelectedIndex = 0;
 
-            comboBoxFps.Items.AddRange(new[] { "30", "60" });
+            comboBoxFps.Items.AddRange(new[] { "3", "5", "7", "10", "15", "20", "25", "30", "60" });
             comboBoxFps.SelectedIndex = 1;
 
             ComboBoxFormat.Items.AddRange(new[] { ".avi", ".mkv" });
@@ -131,6 +132,7 @@ namespace Simple_Screen_Recorder
                 {
                     case "MPEG-4":
                         {
+                            MessageBox.Show("sdfsdf");
                             int fps = int.Parse((string)comboBoxFps.SelectedItem);
                             ProcessStartInfo ProcessId = new("cmd.exe", $"/c {ResourcePath} -f gdigrab -framerate " + fps + " -show_region 1 -i desktop -c:v mpeg4 -b:v 10000k Recordings/" + VideoName + "");
                             ProcessId.WindowStyle = ProcessWindowStyle.Hidden;
@@ -178,7 +180,7 @@ namespace Simple_Screen_Recorder
                         {
                             Screen selectedScreen = Screen.AllScreens[comboBoxMonitors.SelectedIndex];
                             Rectangle bounds = selectedScreen.Bounds;
-                            string getScreen = string.Format("-f gdigrab -framerate {0} -offset_x {1} -offset_y {2} -video_size {3}x{4} -show_region 1 -i desktop -c:v mpeg4 -b:v 10000k Recordings/{5}", comboBoxFps.SelectedItem, bounds.Left, bounds.Top, bounds.Width, bounds.Height, VideoName);
+                            string getScreen = string.Format("-f gdigrab -framerate {0} -offset_x {1} -offset_y {2} -video_size {3}x{4} -show_region 1 -i desktop -c:v mpeg4 -b:v 1 Recordings/{5}", comboBoxFps.SelectedItem, bounds.Left, bounds.Top, bounds.Width, bounds.Height, VideoName);
                             ProcessStartInfo ProcessId = new("cmd.exe", $"/c {ResourcePath} " + getScreen);
                             ProcessId.WindowStyle = ProcessWindowStyle.Hidden;
                             ProcessId.CreateNoWindow = true;
@@ -267,9 +269,12 @@ namespace Simple_Screen_Recorder
                 {
                     ScreenAudioDesktop.waveIn.StopRecording();
                 }
+                Trace.WriteLine(stream.Length);
+
             }
             else if (ScreenAudioDesktop.waveIn is object)
             {
+
                 ScreenAudioDesktop.waveIn.StopRecording();
             }
             else if (ScreenAudioMic.waveIn is object)
@@ -287,9 +292,10 @@ namespace Simple_Screen_Recorder
                     proceso.Kill();
                 }
             }
-
             Process proc = Process.GetProcessById(ProcessId);
             proc.Kill();
+            Trace.WriteLine("sdfsdfd");
+            Trace.WriteLine(stream.Length);
         }
 
         private static void RecMic()
@@ -298,6 +304,7 @@ namespace Simple_Screen_Recorder
             ScreenAudioMic.CreateWaveInDevice();
             ScreenAudioMic.outputFilename = "MicrophoneAudio." + Strings.Format(DateTime.Now, "MM-dd-yyyy.HH.mm.ss") + ".wav";
             ScreenAudioMic.writer = new WaveFileWriter(Path.Combine(ScreenAudioMic.outputFolder, ScreenAudioMic.outputFilename), ScreenAudioMic.waveIn.WaveFormat);
+
             ScreenAudioMic.waveIn.StartRecording();
         }
 
@@ -309,9 +316,11 @@ namespace Simple_Screen_Recorder
             var soundPlayer = new System.Media.SoundPlayer(Properties.Resources.Background);
             soundPlayer.PlayLooping();
 
+
             ScreenAudioDesktop.outputFilename = "SystemAudio." + Strings.Format(DateTime.Now, "MM-dd-yyyy.HH.mm.ss") + ".wav";
             ScreenAudioDesktop.writer = new WaveFileWriter(Path.Combine(ScreenAudioDesktop.outputFolder, ScreenAudioDesktop.outputFilename), ScreenAudioDesktop.waveIn.WaveFormat);
-            
+            ScreenAudioDesktop.outPutStream = new WaveFileWriter(stream, ScreenAudioDesktop.waveIn.WaveFormat);
+
             ScreenAudioDesktop.waveIn.StartRecording();
             aTimer = new System.Timers.Timer();
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
@@ -321,8 +330,8 @@ namespace Simple_Screen_Recorder
         }
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            
-            //Trace.WriteLine(AsOutputStream);
+
+            //Trace.WriteLine(ScreenAudioMic.waveIn.DataAvailable);
         }
         private void BtnStop_Click(object sender, EventArgs e)
         {

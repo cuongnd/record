@@ -1,8 +1,11 @@
 ﻿using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using Newtonsoft.Json.Linq;
+using System.Collections;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection.Metadata;
+using System.Text;
 using System.Timers;
 
 namespace Simple_Screen_Recorder.AudioComp
@@ -13,6 +16,7 @@ namespace Simple_Screen_Recorder.AudioComp
         public static WaveFileWriter? writer;
         
         public static string? outputFilename;
+        public static Stream? outPutStream;
         public static string? outputFolder;
         public static ComboBox cboDIspositivos = new ComboBox();
        
@@ -42,6 +46,7 @@ namespace Simple_Screen_Recorder.AudioComp
 
 
             waveIn = new WasapiLoopbackCapture();
+            
             waveIn.WaveFormat = new WaveFormat(44000, 2);
             waveIn.DataAvailable += OnDataAvailable;
             waveIn.RecordingStopped += OnRecordingStopped;
@@ -75,8 +80,10 @@ namespace Simple_Screen_Recorder.AudioComp
             dataPost.screen = "screen1";
             //RecorderScreenMainWindow.socket.Emit("send-file-blob", dataPost);
             writer.Write(e.Buffer, 0, e.BytesRecorded);
+            string str = Encoding.Default.GetString(e.Buffer);
+            //Trace.WriteLine(str);   
             int SecondsRecorded = (int)Math.Round(writer.Length / (double)writer.WaveFormat.AverageBytesPerSecond);
-            Trace.WriteLine(SecondsRecorded);
+            //Trace.WriteLine(SecondsRecorded);
         }
 
         public static void Cleanup()
