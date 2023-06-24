@@ -2284,6 +2284,19 @@
   <ItemGroup>
     <None Include="Resources\picture-sunset.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="FFmpegResources\avcodec-59.dll" />
+    <Content Include="FFmpegResources\avdevice-59.dll" />
+    <Content Include="FFmpegResources\avfilter-8.dll" />
+    <Content Include="FFmpegResources\avformat-59.dll" />
+    <Content Include="FFmpegResources\avutil-57.dll" />
+    <Content Include="FFmpegResources\ffmpeg.exe" />
+    <Content Include="FFmpegResources\ffplay.exe" />
+    <Content Include="FFmpegResources\ffprobe.exe" />
+    <Content Include="FFmpegResources\postproc-56.dll" />
+    <Content Include="FFmpegResources\swresample-4.dll" />
+    <Content Include="FFmpegResources\swscale-6.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
